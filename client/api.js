@@ -43,4 +43,18 @@ class Api {
       .then((result) => result)
       .catch((err) => console.log(err));
   }
+
+  /* update = PATCH */
+  update(data) {
+    console.log(`Updating task data with id ${data.id}`);                 // Logga att en updatering-sker
+    console.log(`${this.url}/update/${data.id}`)                          // Logga vilken adress den kommunicerar med
+    const req = new Request(`${this.url}/update/${data.id}`, {  // Skapa en ny Request
+      method: 'PATCH',                                                    // method = PATCH
+      body: JSON.stringify(data),                                         // body   = JSON-String av den in-passade data.
+      headers: {                                                          // header
+        'content-type': 'application/json'                                // content-type = JSON
+      }
+    })
+    return fetch(req).then((res) => res).catch((e) => console.log(e))
+  }
 }
